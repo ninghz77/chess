@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chess</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+
+<h1>♟ Chess</h1>
+
+<div id="app">
+
+  <!-- ── Left panel: game setup ── -->
+  <aside id="setup-panel">
+    <h2>New Game</h2>
+
+    <label>
+      Game Mode
+      <select id="mode-select">
+        <option value="hvh">Human vs Human</option>
+        <option value="hvc" selected>Human vs Computer</option>
+        <option value="cvc">Computer vs Computer</option>
+      </select>
+    </label>
+
+    <div id="ai-options" style="display:flex; flex-direction:column; gap:14px;">
+      <label>
+        AI Evaluator
+        <select id="eval-select">
+          <!-- populated by JS from /api/evaluators -->
+          <option value="positional">Positional</option>
+          <option value="material">Material</option>
+        </select>
+      </label>
+
+      <label>
+        Search Depth: <strong id="depth-label">3</strong>
+        <input id="depth-range" type="range" min="1" max="5" value="3" />
+      </label>
+    </div>
+
+    <button id="new-game-btn" class="btn btn-primary">Start Game</button>
+    <button id="resign-btn"   class="btn btn-secondary" style="display:none;">Resign</button>
+  </aside>
+
+  <!-- ── Centre: chessboard ── -->
+  <section id="board-wrap">
+    <div id="board"></div>
+  </section>
+
+  <!-- ── Right panel: status + move list ── -->
+  <aside id="info-panel">
+    <h2>Info</h2>
+    <div id="status-text">Press "Start Game" to begin.</div>
+
+    <h2 style="margin-top:8px;">Moves</h2>
+    <ul id="move-list"></ul>
+  </aside>
+
+</div>
+
+<!-- Promotion dialog -->
+<div id="promo-overlay">
+  <div id="promo-dialog">
+    <h3>Choose promotion</h3>
+    <div id="promo-choices"></div>
+  </div>
+</div>
+
+<script src="/static/game.js"></script>
+</body>
+</html>
